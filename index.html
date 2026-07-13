@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Professional interactive optics simulator for teaching image formation by mirrors and lenses">
+    <meta name="theme-color" content="#6366f1">
+    <title>Optics Simulator - Interactive Learning</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="navbar-container">
+            <div class="navbar-logo">
+                <svg class="logo-icon" viewBox="0 0 24 24" width="32" height="32">
+                    <circle cx="12" cy="12" r="3" fill="currentColor"/>
+                    <path d="M5 12c0-3.866 3.134-7 7-7s7 3.134 7 7-3.134 7-7 7-7-3.134-7-7z" stroke="currentColor" stroke-width="2" fill="none"/>
+                    <line x1="2" y1="12" x2="22" y2="12" stroke="currentColor" stroke-width="2" stroke-dasharray="2,2"/>
+                </svg>
+                <span>Optics Simulator</span>
+            </div>
+            <ul class="navbar-menu">
+                <li><a href="#home" class="nav-link active">Home</a></li>
+                <li>
+                    <a href="#simulations" class="nav-link">Simulations</a>
+                    <div class="submenu">
+                        <a href="PlaneMirror.html">Plane Mirror</a>
+                        <a href="ConcaveMirror.html">Concave Mirror</a>
+                        <a href="ConvexMirror.html">Convex Mirror</a>
+                        <a href="ConvexLens.html">Convex Lens</a>
+                        <a href="ConcaveLens.html">Concave Lens</a>
+                    </div>
+                </li>
+                <li><a href="Formula.html" class="nav-link">Formulas & Calculators</a></li>
+                <li><a href="About.html" class="nav-link">About</a></li>
+            </ul>
+            <div class="navbar-controls">
+                <button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode">
+                    <svg class="sun-icon" viewBox="0 0 24 24" width="20" height="20">
+                        <circle cx="12" cy="12" r="5" fill="currentColor"/>
+                        <line x1="12" y1="1" x2="12" y2="3" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                        <line x1="12" y1="21" x2="12" y2="23" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                        <line x1="1" y1="12" x2="3" y2="12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                        <line x1="21" y1="12" x2="23" y2="12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                    </svg>
+                    <svg class="moon-icon" viewBox="0 0 24 24" width="20" height="20" style="display: none;">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" fill="currentColor"/>
+                    </svg>
+                </button>
+                <button id="menu-toggle" class="menu-toggle" aria-label="Toggle menu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <h1 class="hero-title">Learn Optics Interactively</h1>
+            <p class="hero-subtitle">Master mirror and lens image formation with real-time ray tracing simulations</p>
+            <button class="btn btn-primary" onclick="document.getElementById('simulations').scrollIntoView({ behavior: 'smooth' })">
+                Start Exploring
+            </button>
+        </div>
+        <div class="hero-illustration">
+            <canvas id="hero-canvas" width="400" height="400"></canvas>
+        </div>
+    </section>
+
+    <!-- Simulations Grid -->
+    <section class="simulations" id="simulations">
+        <div class="container">
+            <h2 class="section-title">Interactive Simulations</h2>
+            <p class="section-subtitle">Explore different optical elements and their properties</p>
+            
+            <div class="cards-grid">
+                <!-- Plane Mirror Card -->
+                <div class="card simulation-card">
+                    <div class="card-icon">
+                        <svg viewBox="0 0 24 24" width="48" height="48">
+                            <rect x="6" y="4" width="12" height="16" fill="none" stroke="currentColor" stroke-width="2"/>
+                            <line x1="3" y1="8" x2="21" y2="8" stroke="currentColor" stroke-width="1" stroke-dasharray="2,2"/>
+                            <line x1="3" y1="12" x2="6" y2="12" stroke="currentColor" stroke-width="2"/>
+                            <line x1="18" y1="12" x2="21" y2="12" stroke="currentColor" stroke-width="2"/>
+                        </svg>
+                    </div>
+                    <h3 class="card-title">Plane Mirror</h3>
+                    <p class="card-description">Learn how plane mirrors form virtual, erect images</p>
+                    <div class="card-features">
+                        <span class="badge">Virtual Image</span>
+                        <span class="badge">1:1 Magnification</span>
+                    </div>
+                    <a href="PlaneMirror.html" class="btn btn-secondary btn-small">Launch →</a>
+                </div>
+
+                <!-- Concave Mirror Card -->
+                <div class="card simulation-card">
+                    <div class="card-icon">
+                        <svg viewBox="0 0 24 24" width="48" height="48">
+                            <path d="M4 6 Q6 4 12 4 Q18 4 20 6" fill="none" stroke="currentColor" stroke-width="2"/>
+                            <circle cx="12" cy="12" r="2" fill="currentColor"/>
+                            <line x1="12" y1="2" x2="12" y2="22" stroke="currentColor" stroke-width="1" stroke-dasharray="2,2"/>
+                        </svg>
+                    </div>
+                    <h3 class="card-title">Concave Mirror</h3>
+                    <p class="card-description">Explore converging mirrors and real image formation</p>
+                    <div class="card-features">
+                        <span class="badge">Real & Virtual</span>
+                        <span class="badge">Converging</span>
+                    </div>
+                    <a href="ConcaveMirror.html" class="btn btn-secondary btn-small">Launch →</a>
+                </div>
+
+                <!-- Convex Mirror Card -->
+                <div class="card simulation-card">
+                    <div class="card-icon">
+                        <svg viewBox="0 0 24 24" width="48" height="48">
+                            <path d="M4 6 Q6 8 12 8 Q18 8 20 6" fill="none" stroke="currentColor" stroke-width="2"/>
+                            <circle cx="12" cy="12" r="2" fill="currentColor"/>
+                            <line x1="12" y1="2" x2="12" y2="22" stroke="currentColor" stroke-width="1" stroke-dasharray="2,2"/>
+                        </svg>
+                    </div>
+                    <h3 class="card-title">Convex Mirror</h3>
+                    <p class="card-description">Understand diverging mirrors and virtual images</p>
+                    <div class="card-features">
+                        <span class="badge">Virtual Image</span>
+                        <span class="badge">Diverging</span>
+                    </div>
+                    <a href="ConvexMirror.html" class="btn btn-secondary btn-small">Launch →</a>
+                </div>
+
+                <!-- Convex Lens Card -->
+                <div class="card simulation-card">
+                    <div class="card-icon">
+                        <svg viewBox="0 0 24 24" width="48" height="48">
+                            <path d="M6 4 Q8 6 8 12 Q8 18 6 20" fill="none" stroke="currentColor" stroke-width="2"/>
+                            <path d="M18 4 Q16 6 16 12 Q16 18 18 20" fill="none" stroke="currentColor" stroke-width="2"/>
+                            <line x1="12" y1="2" x2="12" y2="22" stroke="currentColor" stroke-width="1" stroke-dasharray="2,2"/>
+                        </svg>
+                    </div>
+                    <h3 class="card-title">Convex Lens</h3>
+                    <p class="card-description">Study converging lenses and real image formation</p>
+                    <div class="card-features">
+                        <span class="badge">Real & Virtual</span>
+                        <span class="badge">Converging</span>
+                    </div>
+                    <a href="ConvexLens.html" class="btn btn-secondary btn-small">Launch →</a>
+                </div>
+
+                <!-- Concave Lens Card -->
+                <div class="card simulation-card">
+                    <div class="card-icon">
+                        <svg viewBox="0 0 24 24" width="48" height="48">
+                            <path d="M8 6 Q7 9 7 12 Q7 15 8 18" fill="none" stroke="currentColor" stroke-width="2"/>
+                            <path d="M16 6 Q17 9 17 12 Q17 15 16 18" fill="none" stroke="currentColor" stroke-width="2"/>
+                            <line x1="12" y1="2" x2="12" y2="22" stroke="currentColor" stroke-width="1" stroke-dasharray="2,2"/>
+                        </svg>
+                    </div>
+                    <h3 class="card-title">Concave Lens</h3>
+                    <p class="card-description">Explore diverging lenses and virtual images</p>
+                    <div class="card-features">
+                        <span class="badge">Virtual Image</span>
+                        <span class="badge">Diverging</span>
+                    </div>
+                    <a href="ConcaveLens.html" class="btn btn-secondary btn-small">Launch →</a>
+                </div>
+
+                <!-- Formulas & Calculators Card -->
+                <div class="card simulation-card">
+                    <div class="card-icon">
+                        <svg viewBox="0 0 24 24" width="48" height="48">
+                            <rect x="4" y="4" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" rx="2"/>
+                            <line x1="4" y1="10" x2="20" y2="10" stroke="currentColor" stroke-width="1"/>
+                            <line x1="10" y1="4" x2="10" y2="20" stroke="currentColor" stroke-width="1"/>
+                        </svg>
+                    </div>
+                    <h3 class="card-title">Formulas & Calculators</h3>
+                    <p class="card-description">Learn formulas and use interactive calculators</p>
+                    <div class="card-features">
+                        <span class="badge">6+ Calculators</span>
+                        <span class="badge">Step-by-step</span>
+                    </div>
+                    <a href="Formula.html" class="btn btn-secondary btn-small">Explore →</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features">
+        <div class="container">
+            <h2 class="section-title">Why Choose Optics Simulator?</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">⚡</div>
+                    <h3>Accurate Physics</h3>
+                    <p>Precise ray tracing and optical calculations based on real physics principles</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📱</div>
+                    <h3>Responsive Design</h3>
+                    <p>Works perfectly on mobile, tablet, laptop, and smart boards</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🌙</div>
+                    <h3>Dark Mode</h3>
+                    <p>Beautiful light and dark themes with smooth transitions</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🎮</div>
+                    <h3>Interactive Controls</h3>
+                    <p>Intuitive sliders, mouse dragging, and touch support</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📚</div>
+                    <h3>Rich Learning Materials</h3>
+                    <p>Formulas, calculators, practice problems, and detailed explanations</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🔒</div>
+                    <h3>100% Offline</h3>
+                    <p>No internet required, no tracking, complete privacy</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>About</h4>
+                <p>Optics Simulator is a professional educational tool designed to teach image formation by mirrors and lenses through interactive simulations.</p>
+            </div>
+            <div class="footer-section">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="PlaneMirror.html">Plane Mirror</a></li>
+                    <li><a href="ConcaveMirror.html">Concave Mirror</a></li>
+                    <li><a href="ConvexMirror.html">Convex Mirror</a></li>
+                    <li><a href="ConvexLens.html">Convex Lens</a></li>
+                    <li><a href="ConcaveLens.html">Concave Lens</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Resources</h4>
+                <ul>
+                    <li><a href="Formula.html">Formulas</a></li>
+                    <li><a href="Formula.html#calculators">Calculators</a></li>
+                    <li><a href="About.html">About</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 Optics Simulator. Made with ❤️ for students of optics.</p>
+        </div>
+    </footer>
+
+    <script src="js/common.js"></script>
+    <script>
+        /**
+         * Initialize home page
+         * Draws animated hero illustration
+         */
+        function initializeHero() {
+            const canvas = document.getElementById('hero-canvas');
+            if (!canvas) return;
+
+            const ctx = canvas.getContext('2d');
+            let animationFrameId;
+            let time = 0;
+
+            function drawHeroIllustration() {
+                // Clear canvas
+                ctx.fillStyle = getComputedStyle(document.documentElement).getPropertyValue('--bg-secondary').trim();
+                ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+                // Draw animated convex lens
+                ctx.strokeStyle = getComputedStyle(document.documentElement).getPropertyValue('--primary').trim();
+                ctx.lineWidth = 3;
+
+                // Left lens curve
+                ctx.beginPath();
+                ctx.arc(140, 200, 60, -Math.PI / 3, Math.PI / 3, false);
+                ctx.stroke();
+
+                // Right lens curve
+                ctx.beginPath();
+                ctx.arc(260, 200, 60, 2 * Math.PI / 3, Math.PI / 3, true);
+                ctx.stroke();
+
+                // Optical axis
+                ctx.strokeStyle = getComputedStyle(document.documentElement).getPropertyValue('--text-secondary').trim();
+                ctx.lineWidth = 1;
+                ctx.setLineDash([5, 5]);
+                ctx.beginPath();
+                ctx.moveTo(0, 200);
+                ctx.lineTo(400, 200);
+                ctx.stroke();
+                ctx.setLineDash([]);
+
+                // Animated light rays
+                const rayY = 200 + 30 * Math.sin(time * 0.05);
+                ctx.strokeStyle = getComputedStyle(document.documentElement).getPropertyValue('--accent').trim();
+                ctx.lineWidth = 2;
+                ctx.setLineDash([3, 3]);
+
+                ctx.beginPath();
+                ctx.moveTo(20, rayY);
+                ctx.lineTo(200, 200);
+                ctx.stroke();
+
+                ctx.beginPath();
+                ctx.moveTo(200, 200);
+                ctx.lineTo(380, 200);
+                ctx.stroke();
+                ctx.setLineDash([]);
+
+                // Animated object arrow
+                drawArrow(ctx, 60, 200, 60, 200 - 40 - 20 * Math.sin(time * 0.03));
+
+                // Animated image arrow
+                drawArrow(ctx, 340, 200, 340, 200 - 30 + 15 * Math.sin(time * 0.03));
+
+                time++;
+                animationFrameId = requestAnimationFrame(drawHeroIllustration);
+            }
+
+            /**
+             * Draw arrow for object/image
+             */
+            function drawArrow(ctx, x, y1, x2, y2) {
+                const headlen = 8;
+                ctx.strokeStyle = getComputedStyle(document.documentElement).getPropertyValue('--primary').trim();
+                ctx.fillStyle = ctx.strokeStyle;
+                ctx.lineWidth = 2;
+
+                // Draw line
+                ctx.beginPath();
+                ctx.moveTo(x, y1);
+                ctx.lineTo(x2, y2);
+                ctx.stroke();
+
+                // Draw arrowhead
+                const angle = Math.atan2(y2 - y1, x2 - x1);
+                ctx.beginPath();
+                ctx.moveTo(x2, y2);
+                ctx.lineTo(x2 - headlen * Math.cos(angle - Math.PI / 6), y2 - headlen * Math.sin(angle - Math.PI / 6));
+                ctx.lineTo(x2 - headlen * Math.cos(angle + Math.PI / 6), y2 - headlen * Math.sin(angle + Math.PI / 6));
+                ctx.closePath();
+                ctx.fill();
+            }
+
+            drawHeroIllustration();
+        }
+
+        // Initialize when DOM is ready
+        document.addEventListener('DOMContentLoaded', initializeHero);
+    </script>
+</body>
+</html>
