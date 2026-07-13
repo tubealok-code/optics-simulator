@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Plane Mirror simulation - Interactive optics learning tool">
+    <title>Plane Mirror Simulation - Optics Simulator</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/simulation.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="navbar-container">
+            <a href="index.html" class="navbar-logo">
+                <svg class="logo-icon" viewBox="0 0 24 24" width="32" height="32">
+                    <circle cx="12" cy="12" r="3" fill="currentColor"/>
+                    <path d="M5 12c0-3.866 3.134-7 7-7s7 3.134 7 7-3.134 7-7 7-7-3.134-7-7z" stroke="currentColor" stroke-width="2" fill="none"/>
+                    <line x1="2" y1="12" x2="22" y2="12" stroke="currentColor" stroke-width="2" stroke-dasharray="2,2"/>
+                </svg>
+                <span>Optics Simulator</span>
+            </a>
+            <div class="navbar-controls">
+                <button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode">
+                    <svg class="sun-icon" viewBox="0 0 24 24" width="20" height="20">
+                        <circle cx="12" cy="12" r="5" fill="currentColor"/>
+                        <line x1="12" y1="1" x2="12" y2="3" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                        <line x1="12" y1="21" x2="12" y2="23" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                        <line x1="1" y1="12" x2="3" y2="12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                        <line x1="21" y1="12" x2="23" y2="12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                    </svg>
+                    <svg class="moon-icon" viewBox="0 0 24 24" width="20" height="20" style="display: none;">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" fill="currentColor"/>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="simulation-container">
+        <div class="simulation-header">
+            <h1>Plane Mirror Simulation</h1>
+            <p>Learn how plane mirrors form virtual, erect images at the same distance behind the mirror</p>
+        </div>
+
+        <div class="simulation-layout">
+            <!-- Canvas Area -->
+            <div class="canvas-area">
+                <canvas id="simulation-canvas" width="1000" height="600"></canvas>
+                <div class="canvas-toolbar">
+                    <button id="btn-play" class="btn-icon" title="Play (P)">
+                        <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
+                            <path d="M8 5v14l11-7z"/>
+                        </svg>
+                    </button>
+                    <button id="btn-pause" class="btn-icon" title="Pause">
+                        <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
+                            <rect x="6" y="4" width="4" height="16"/>
+                            <rect x="14" y="4" width="4" height="16"/>
+                        </svg>
+                    </button>
+                    <button id="btn-reset" class="btn-icon" title="Reset (R)">
+                        <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
+                            <path d="M1 4v6h6M23 20v-6h-6M20.3 5C18.6 3.2 16.2 2 13.5 2 8.1 2 3.7 6.4 3.7 11.9"/>
+                        </svg>
+                    </button>
+                    <button id="btn-screenshot" class="btn-icon" title="Screenshot">
+                        <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
+                            <rect x="2" y="3" width="20" height="18" rx="2" fill="none" stroke="currentColor" stroke-width="2"/>
+                            <circle cx="12" cy="13" r="3" stroke="currentColor" stroke-width="2" fill="none"/>
+                            <circle cx="18" cy="7" r="1" fill="currentColor"/>
+                        </svg>
+                    </button>
+                    <button id="btn-fullscreen" class="btn-icon" title="Fullscreen (F)">
+                        <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
+                            <path d="M8 3H5a2 2 0 00-2 2v3m16-5h3a2 2 0 012 2v3M3 16v3a2 2 0 002 2h3m16 0h3a2 2 0 002-2v-3"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Control Panel -->
+            <div class="control-panel">
+                <div class="panel-section">
+                    <h3>Controls</h3>
+                    
+                    <div class="control-group">
+                        <label for="object-distance">Object Distance (cm)</label>
+                        <input type="range" id="object-distance" min="5" max="50" value="20" step="1">
+                        <span id="object-distance-value">20</span>
+                    </div>
+
+                    <div class="control-group">
+                        <label for="object-height">Object Height (cm)</label>
+                        <input type="range" id="object-height" min="2" max="15" value="8" step="0.5">
+                        <span id="object-height-value">8</span>
+                    </div>
+
+                    <div class="control-group">
+                        <label>Animation Speed</label>
+                        <input type="range" id="animation-speed" min="0.1" max="2" value="1" step="0.1">
+                        <span id="animation-speed-value">1x</span>
+                    </div>
+                </div>
+
+                <div class="panel-section">
+                    <h3>Display Options</h3>
+                    <div class="checkbox-group">
+                        <label>
+                            <input type="checkbox" id="show-rays" checked>
+                            Show Rays
+                        </label>
+                    </div>
+                    <div class="checkbox-group">
+                        <label>
+                            <input type="checkbox" id="show-labels" checked>
+                            Show Labels
+                        </label>
+                    </div>
+                    <div class="checkbox-group">
+                        <label>
+                            <input type="checkbox" id="show-grid" checked>
+                            Show Grid
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Information Panel -->
+        <div class="info-panel">
+            <div class="info-grid">
+                <div class="info-item">
+                    <label>Object Distance (u)</label>
+                    <value id="info-u">20.00 cm</value>
+                </div>
+                <div class="info-item">
+                    <label>Image Distance (v)</label>
+                    <value id="info-v">20.00 cm</value>
+                </div>
+                <div class="info-item">
+                    <label>Object Height (h)</label>
+                    <value id="info-h">8.00 cm</value>
+                </div>
+                <div class="info-item">
+                    <label>Image Height (h')</label>
+                    <value id="info-h-prime">8.00 cm</value>
+                </div>
+                <div class="info-item">
+                    <label>Magnification (m)</label>
+                    <value id="info-m">1.00</value>
+                </div>
+                <div class="info-item">
+                    <label>Image Nature</label>
+                    <value id="info-nature">Virtual, Erect, Same Size</value>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/common.js"></script>
+    <script src="js/physics.js"></script>
+    <script src="js/canvas-renderer.js"></script>
+    <script src="js/PlaneMirror.js"></script>
+</body>
+</html>
